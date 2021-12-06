@@ -1,5 +1,4 @@
 <template>
-    <Navigation />
     <div>Starship Card</div>
 </template>
 
