@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navigation">
     <router-link to="/">Home</router-link> |
     <router-link to="/starships">Starships</router-link>
   </div>
@@ -13,6 +13,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.navigation {
+  height: 20vh;
+}
 </style>
