@@ -3,6 +3,7 @@
     <li
         v-for="(starship, index) in starshipList"
         :key="index"
+        :ref="index === starshipList.length -1 ? 'last' : undefined"
         class = "list-item">
         <router-link
             :to="{name: 'StarshipCard', params: {id: (starship.url).replace(/[^0-9]/g,'')}}">
@@ -22,8 +23,34 @@ export default {
             return this.$store.getters.starshipList;
         }
     },
+    methods: {
+        async addObserver() {
+            await this.$nextTick();
+            const options = {
+                root: document,
+                rootMargin: '5px',
+                threshold: 0
+            }
+            const callback = (entries) => {
+                if (entries[0].isIntersecting) {
+                    this.$store.dispatch('getMoreStarships');
+                }
+            };
+            this.observer = new IntersectionObserver(callback, options);
+            this.observer.observe(this.$refs.last);
+        }
+    },
     mounted() {
         this.$store.dispatch('getStarships');
+        this.addObserver;
+    },
+    watch: {
+        starshipList: {
+            deep: true,
+            handler() {
+                this.addObserver();
+            }
+        }
     }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
-    <div>Starship Card</div>
     <ul>
-        <li v-for="(value, property, index) in this.starshipInfo" :key="index">
+        <li v-for="(value, property, index) in starshipInfo" 
+        :key="index">
             {{property}} : {{value}}
         </li>
     </ul>
