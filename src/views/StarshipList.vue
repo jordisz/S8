@@ -1,5 +1,5 @@
 <template>
-  <h2>Starship List</h2>
+  <h2>Select a Starship to open its description</h2>
     <li
         v-for="(starship, index) in starshipList"
         :key="index"
@@ -62,17 +62,36 @@ export default {
     display: flex;
     justify-content: center;
     list-style: none;
-    border: 1px solid black;
+    color: #b9b9b9;
+    border-radius: 7px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.list-item:hover {
+    background-color: #434343;
 }
 
 .list-item a {
     display: inline-block;
     width: 100%;
     text-decoration: none;
+    color: #b9b9b9;
+}
+
+h2 {
+    display: inline-block;
+    width: 100vw;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1rem;
 }
 
 h6 {
     font-size: 1.2rem;
     margin: 1rem;
+    color: #ddd;
+    font-weight: 300;
 }
 </style>

@@ -1,8 +1,12 @@
 <template>
-  <div class="navigation">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/starships">Starships</router-link>
-  </div>
+  <ul class="navigation">
+    <li>
+      <router-link to="/">Home</router-link>
+    </li>
+    <li>
+      <router-link to="/starships">Starships</router-link>
+    </li>
+  </ul>
     
 </template>
 
@@ -14,7 +18,38 @@ export default {
 </script>
 
 <style scoped>
+/* breakpoint @900px */
 .navigation {
-  height: 20vh;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  height: 46px;
+  border-top: solid 1px #343434;
+  border-bottom: solid 1px #343434;
+  margin: 0;
+}
+
+li {
+  display: block;
+  height: 38px;
+  padding: 4px 32px;
+  border-left: solid 1px #343434;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1rem;
+}
+
+li:last-of-type {
+  border-right: solid 1px #343434;
+}
+
+a {
+  display: block;
+  margin-top: 11px;
+}
+
+a:hover {
+  color: #fff;
+  text-shadow: rgb(255, 255, 128) 1px 0 10px;
 }
 </style>
