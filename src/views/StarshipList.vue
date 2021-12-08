@@ -1,16 +1,20 @@
 <template>
-  <h2>Select a Starship to open its description</h2>
-    <li
-        v-for="(starship, index) in starshipList"
-        :key="index"
-        :ref="index === starshipList.length -1 ? 'last' : undefined"
-        class = "list-item">
-        <router-link
-            :to="{name: 'StarshipCard', params: {id: (starship.url).replace(/[^0-9]/g,'')}}">
-                <h6>{{starship.name}}</h6>
-                <p>{{starship.model}}</p>
-        </router-link>
-    </li>
+  <div class="container">
+      <h2>Select a Starship to open its description</h2>
+        <ul>
+            <li
+                v-for="(starship, index) in starshipList"
+                :key="index"
+                :ref="index === starshipList.length -1 ? 'last' : undefined"
+                class = "list-item">
+                <router-link
+                    :to="{name: 'StarshipCard', params: {id: (starship.url).replace(/[^0-9]/g,'')}}">
+                        <h6>{{starship.name}}</h6>
+                        <p>{{starship.model}}</p>
+                </router-link>
+            </li>
+        </ul>
+  </div>
 </template>
 
 <script>
@@ -56,6 +60,11 @@ export default {
 </script>
 
 <style scoped>
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 .list-item {
     width: 70vw;
     margin: 1.6em auto;
@@ -86,6 +95,9 @@ h2 {
     font-size: 14px;
     font-weight: 500;
     line-height: 1rem;
+    background-color: #0a0b0b;
+    margin: 0;
+    padding: 12px 0;
 }
 
 h6 {

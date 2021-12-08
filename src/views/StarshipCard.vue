@@ -1,25 +1,25 @@
 <template>
     <div class="container">
-        <h2 class="name">{{starshipName}}</h2>
+        <h2 class="name">{{starshipInfo.name}}</h2>
         <img :src="`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`" @error="handleMissingImage" alt="">
         <div class="lists">
             <ul>
-                <li><span>Model:</span> &thinsp; {{starshipModel}}</li>
-                <li><span>Starship Class:</span> &thinsp; {{starshipClass}}</li>
-                <li><span>Manufacturer:</span> &thinsp; {{manufacturer}}</li>
-                <li><span>Cost:</span> &thinsp; {{cost}} credits</li>
+                <li><span>Model:</span> &thinsp; {{starshipInfo.model}}</li>
+                <li><span>Starship Class:</span> &thinsp; {{starshipInfo.starship_class}}</li>
+                <li><span>Manufacturer:</span> &thinsp; {{starshipInfo.manufacturer}}</li>
+                <li><span>Cost:</span> &thinsp; {{starshipInfo.cost_in_credits}} credits</li>
             </ul>
             <ul>
-                <li><span>Crew:</span> &thinsp; {{crew}}</li>
-                <li><span>Passenger Capacity:</span> &thinsp; {{passengers}}</li>
-                <li><span>Cargo Capacity:</span> &thinsp; {{cargoCapacity}} tons</li>
-                <li><span>Consumables:</span> &thinsp; {{consumables}}</li>
+                <li><span>Crew:</span> &thinsp; {{starshipInfo.crew}}</li>
+                <li><span>Passenger Capacity:</span> &thinsp; {{starshipInfo.passengers}}</li>
+                <li><span>Cargo Capacity:</span> &thinsp; {{starshipInfo.cargo_capacity}} tons</li>
+                <li><span>Consumables:</span> &thinsp; {{starshipInfo.consumables}}</li>
             </ul>
             <ul>
-                <li><span>Length:</span> &thinsp; {{starshipLength}} meters</li>
-                <li><span>Maximum Atmosphering Speed:</span> &thinsp; {{maxSpeed}} km/h</li>
-                <li><span>Hyperdrive Rating:</span> &thinsp; {{hyper}}</li>
-                <li><span>Maximum Speed In Realspace:</span> &thinsp; {{mglt}} MGLT</li>
+                <li><span>Length:</span> &thinsp; {{starshipInfo.length}} meters</li>
+                <li><span>Maximum Atmosphering Speed:</span> &thinsp; {{starshipInfo.max_atmosphering_speed}} km/h</li>
+                <li><span>Hyperdrive Rating:</span> &thinsp; {{starshipInfo.hyperdrive_rating}}</li>
+                <li><span>Maximum Speed In Realspace:</span> &thinsp; {{starshipInfo.MGLT}} MGLT</li>
             </ul>
         </div>
     </div>
@@ -37,52 +37,13 @@ export default {
     },
     data() {
         return {
-            routeID: null
+            routeID: null,
+            id: this.$route.params.id
         }
     },
     computed: {
-        starshipName() {
-            return this.$store.getters.selectedStarshipInfo.name;
-        },
-        starshipModel() {
-            return this.$store.getters.selectedStarshipInfo.model;
-        },
-        starshipClass() {
-            console.table(this.$store.getters.selectedStarshipInfo);
-            return this.$store.getters.selectedStarshipInfo.starship_class;
-        },
-        manufacturer() {
-            return this.$store.getters.selectedStarshipInfo.manufacturer;
-        },
-        crew() {
-            return this.$store.getters.selectedStarshipInfo.crew;
-        },
-        passengers() {
-            return this.$store.getters.selectedStarshipInfo.passengers;
-        },
-        cargoCapacity() {
-            return this.$store.getters.selectedStarshipInfo.cargo_capacity;
-        },
-        consumables() {
-            return this.$store.getters.selectedStarshipInfo.consumables;
-        },
-        starshipLength() {
-            return this.$store.getters.selectedStarshipInfo.length;
-        },
-        maxSpeed() {
-            return this.$store.getters.selectedStarshipInfo.max_atmosphering_speed;
-        },
-        hyper() {
-            return this.$store.getters.selectedStarshipInfo.hyperdrive_rating;
-        },
-        mglt() {
-            return this.$store.getters.selectedStarshipInfo.MGLT;
-        },
-        cost() {
-            return this.$store.getters.selectedStarshipInfo.cost_in_credits;
-        },
-        id() {
-            return this.$store.getters.selectedStarshipInfo.url.replace(/[^0-9]/g,'');
+        starshipInfo() {
+            return this.$store.getters.selectedStarshipInfo
         }
     },
     methods: {
@@ -99,6 +60,8 @@ export default {
 
 <style scoped>
 .name {
+    margin: 0;
+    padding: 20px;
     text-transform: uppercase;
     color: #ddd;
 }
@@ -108,8 +71,8 @@ img {
 }
 
 .lists {
-    width: 70vw;
-    margin: auto;
+    max-width: 900px;
+    margin: 20px auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 2em;

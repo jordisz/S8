@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="header">
-      <div class="logo">Star Wars</div>
+      <div class="logo"><img src="./assets/logo.png" alt=""></div>
       <Navigation />
     </div>
     <router-view/>
@@ -42,7 +42,16 @@ body {
 
 .logo {
   height: 134px;
-  padding: 20px 0;
+}
+
+.container {
+    min-height: calc(100vh - 180px);
+    background-color: #151515;
+    background-image: url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-left.jpg),url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-right.jpg);
+    background-repeat: repeat-y;
+    background-position: left top,right top;
+    background-attachment: fixed;
+    background-size: auto,auto;
 }
 
 a {

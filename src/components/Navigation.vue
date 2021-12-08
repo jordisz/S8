@@ -27,11 +27,13 @@ export default {
   border-top: solid 1px #343434;
   border-bottom: solid 1px #343434;
   margin: 0;
+  padding: 0;
 }
 
 li {
   display: block;
   height: 38px;
+  width: 90px;
   padding: 4px 32px;
   border-left: solid 1px #343434;
   font-size: 14px;
