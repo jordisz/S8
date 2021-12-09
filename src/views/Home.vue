@@ -23,8 +23,13 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  margin: 0;
+  padding: 22px 0;
+}
 .info-text {
   width: 70vw;
   margin: 20px auto;
 }
+
 </style>

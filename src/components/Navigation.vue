@@ -1,19 +1,20 @@
 <template>
-  <ul class="navigation">
-    <li>
-      <router-link to="/">Home</router-link>
-    </li>
-    <li>
-      <router-link to="/starships">Starships</router-link>
-    </li>
-  </ul>
+  <div>
+    <ul class="navigation">
+      <li>
+        <router-link to="/">Home</router-link>
+      </li>
+      <li>
+        <router-link to="/starships">Starships</router-link>
+      </li>
+    </ul>
+  </div>
     
 </template>
 
 <script>
 export default {
-    name: 'Navigation',
-    
+    name: 'Navigation'    
 }
 </script>
 
@@ -46,8 +47,24 @@ li:last-of-type {
 }
 
 a {
+  position: relative;
   display: block;
   margin-top: 11px;
+}
+
+.router-link-active:before {
+  position: absolute;
+  content: '';
+  width: 5ch;
+  height: 2px;
+  left: 23%;
+  top: 120%;
+  background-color: rgba(255, 99, 71, 0.6);
+}
+
+.router-link-active {
+  color: #eee;
+  text-shadow: rgb(233, 233, 116) .5px 0 6px;
 }
 
 a:hover {
