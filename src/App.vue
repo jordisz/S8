@@ -3,13 +3,12 @@
     <div class="header">
       <div class="header-top">
         <div class="logo"><img src="./assets/logo.png" alt=""></div>
-        <div class="login-links" v-if="!this.$store.state.isLoggedIn">
+        <div class="login-links" v-if="!isLoggedIn">
           <router-link to="/Login">Log In</router-link>
           <router-link to="/Register">Sign Up</router-link>
         </div>
-        <div class="login-links" v-if="this.$store.state.isLoggedIn">
-          <!--(do it with computed) -->
-          <router-link to="#" @click="this.$store.commit('setLoggedIn', false)">Log Out</router-link>
+        <div class="login-links" v-if="isLoggedIn">
+          <router-link to="/" @click="logOut">Log Out</router-link>
         </div>
       </div>
       <Navigation />
@@ -23,6 +22,16 @@ import Navigation from '@/components/Navigation'
 export default {
   components: {
     Navigation
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    }
+  },
+  methods: {
+    logOut() {
+      this.$store.commit('setLoggedIn', false);
+    }
   }
 }
 </script>
@@ -72,7 +81,8 @@ body {
 .container {
     min-height: calc(100vh - 180px);
     background-color: #151515;
-    background-image: url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-left.jpg),url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-right.jpg);
+    background-image: url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-left.jpg),
+                      url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-right.jpg);
     background-repeat: repeat-y;
     background-position: left top,right top;
     background-attachment: fixed;

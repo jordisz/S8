@@ -4,17 +4,21 @@
       <li>
         <router-link to="/">Home</router-link>
       </li>
-      <li v-if="this.$store.state.isLoggedIn">
+      <li v-if="isLoggedIn">
         <router-link to="/starships">Starships</router-link>
       </li>
     </ul>
   </div>
-    
 </template>
 
 <script>
 export default {
-    name: 'Navigation'    
+    name: 'Navigation',
+    computed: {
+      isLoggdIn() {
+        return this.$store.state.isLoggedIn;
+      }
+    }   
 }
 </script>
 
