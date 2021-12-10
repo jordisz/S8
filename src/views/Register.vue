@@ -33,8 +33,15 @@ export default {
     },
     methods: {
       createNewUser() {         // TODO: try to move it to store.
-        if (this.$store.state.user === '') {
+        let users = JSON.parse(localStorage.getItem("userList") || "[]");
+        if (this.$store.state.user === '') {          
           console.log('Please enter a username');
+          this.$store.commit('setUser', '');
+          this.$store.commit('setPassword', '');
+          return;
+        }
+        if (users.some(user => user.userName === this.user)) {
+          console.log(`User name ${this.user} already exists, sorry.`)
           this.$store.commit('setUser', '');
           this.$store.commit('setPassword', '');
           return;
@@ -48,7 +55,7 @@ export default {
           userName: this.$store.state.user, 
           password: this.$store.state.password 
           }
-        let users = JSON.parse(localStorage.getItem("userList") || "[]");
+
         users.push(newUser);
         localStorage.setItem("userList", JSON.stringify(users));
         this.$store.commit('setLoggedIn', true);
