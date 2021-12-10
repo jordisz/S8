@@ -96,7 +96,7 @@ h2 {
     font-weight: 500;
     line-height: 1rem;
     background-color: #0a0b0b;
-    margin: 0;
+    margin: 2px 0 0 0;
     padding: 12px 0;
 }
 

@@ -4,7 +4,7 @@
       <li>
         <router-link to="/">Home</router-link>
       </li>
-      <li>
+      <li v-if="this.$store.state.isLoggedIn">
         <router-link to="/starships">Starships</router-link>
       </li>
     </ul>

@@ -1,7 +1,17 @@
 <template>
   <div id="app">
     <div class="header">
-      <div class="logo"><img src="./assets/logo.png" alt=""></div>
+      <div class="header-top">
+        <div class="logo"><img src="./assets/logo.png" alt=""></div>
+        <div class="login-links" v-if="!this.$store.state.isLoggedIn">
+          <router-link to="/Login">Log In</router-link>
+          <router-link to="/Register">Sign Up</router-link>
+        </div>
+        <div class="login-links" v-if="this.$store.state.isLoggedIn">
+          <!--(do it with computed) -->
+          <router-link to="#" @click="this.$store.commit('setLoggedIn', false)">Log Out</router-link>
+        </div>
+      </div>
       <Navigation />
     </div>
     <router-view/>
@@ -40,8 +50,23 @@ body {
   justify-content: space-between;
 }
 
+.header-top {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .logo {
+  grid-column-start: 2;
   height: 134px;
+}
+
+.login-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .container {

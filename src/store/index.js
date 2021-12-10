@@ -4,7 +4,10 @@ export default createStore({
   state: {
     starships: [],
     selectedStarship: [],
-    nextPage: null
+    nextPage: null,
+    user: '', // ??
+    password: '', // ??
+    isLoggedIn: false
   },
   getters :{
     starshipList: (state) => {
@@ -26,6 +29,15 @@ export default createStore({
     },
     addStarships(state, starships) {
       state.starships = [...state.starships, ...starships]
+    },
+    setUser(state, user) {
+      state.user = user;
+    },
+    setPassword(state, password) {
+      state.password = password;
+    },
+    setLoggedIn(state, bool) {
+      state.isLoggedIn = bool;
     }
   },
   actions: {
