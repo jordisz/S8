@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="register-form">
     <h2>Create Your Account</h2>
     <form>
-      <input type="text" placeholder="Username" v-model="user"/>
-      <input type="password" placeholder="Password" v-model="password"/>
-      <button @click.prevent="createNewUser">Create Account</button>
+      <div class="input-wrapper">
+        <input class="form-input" type="text" placeholder="Username" v-model="user"/>
+        <input class="form-input" type="password" placeholder="Password" v-model="password"/>
+        <button class="form-button" @click.prevent="createNewUser">Create Account</button>
+      </div>
     </form>
     <p>Already have an account? <router-link to="/Login">Sign in</router-link></p>
   </div>
@@ -13,6 +15,11 @@
 <script>
 export default {
     name: 'Register',
+    data() {
+      return {
+        focused: false
+      }
+    },
     computed: {
       user: {
         get () {
@@ -32,7 +39,7 @@ export default {
       }
     },
     methods: {
-      createNewUser() {         // TODO: try to move it to store.
+      createNewUser() {
         let users = JSON.parse(localStorage.getItem("userList") || "[]");
         if (this.$store.state.user === '') {          
           console.log('Please enter a username');
@@ -59,7 +66,8 @@ export default {
         users.push(newUser);
         localStorage.setItem("userList", JSON.stringify(users));
         this.$store.commit('setLoggedIn', true);
-        console.log(`New user created: ${this.$store.state.user}, password is ${this.$store.state.password}. Welcome, you're logged in.`);
+        console.log(`New user created: ${this.$store.state.user}, password is ${this.$store.state.password}.`);
+        console.log("Welcome, you're logged in.")
         this.$store.commit('setUser', '');
         this.$store.commit('setPassword', '');
       }
@@ -68,11 +76,17 @@ export default {
 </script>
 
 <style scoped>
-form {
-  width: 40vw;
-  margin: 20px auto 0 auto;
-  display: flex;
-  flex-direction: column;
+.register-form {
+  margin-top: 60px;
 }
 
+h2 {
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #edd700;
+}
+
+a {
+  color: #edd500d5;
+}
 </style>

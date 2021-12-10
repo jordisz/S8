@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="login-form">
     <h2>Sign In</h2>
     <form>
-      <input type="text" placeholder="Username" v-model="user"/>
-      <input type="password" placeholder="Password" v-model="password"/>
-      <button @click.prevent="checkUser">Sign In</button>
+      <div class="input-wrapper">
+        <input class="form-input" type="text" placeholder="Username" v-model="user"/>
+        <input class="form-input" type="password" placeholder="Password" v-model="password"/>
+        <button class="form-button" @click.prevent="checkUser">Sign In</button>
+      </div>
     </form>
     <p>
       <router-link to="/Register">Create an Account</router-link>
@@ -58,10 +60,18 @@ export default {
 </script>
 
 <style scoped>
-form {
-  width: 40vw;
-  margin: 20px auto 0 auto;
-  display: flex;
-  flex-direction: column;
+.login-form {
+  margin-top: 60px;
 }
+
+h2 {
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #edd700;
+}
+
+a {
+  color: #edd500d5;
+}
+
 </style>

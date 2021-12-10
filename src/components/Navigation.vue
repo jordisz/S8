@@ -4,7 +4,7 @@
       <li>
         <router-link to="/">Home</router-link>
       </li>
-      <li v-if="isLoggedIn">
+      <li v-if="this.$store.state.isLoggedIn">
         <router-link to="/starships">Starships</router-link>
       </li>
     </ul>
@@ -14,11 +14,7 @@
 <script>
 export default {
     name: 'Navigation',
-    computed: {
-      isLoggdIn() {
-        return this.$store.state.isLoggedIn;
-      }
-    }   
+ 
 }
 </script>
 

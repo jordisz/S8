@@ -96,4 +96,57 @@ a {
 a:visited {
   color: #999;
 }
+
+form {
+  max-width: 520px;
+  margin: 20px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrapper {
+    width: 460px;
+    margin: 0 auto;
+}
+
+.form-input {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: 38px;
+  padding: 0 15px;
+  line-height: 40px;
+  outline: none;
+  border: 1px solid #d8dee8;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  font-size: .85rem;
+  letter-spacing: 0.8px;
+  color: #333;
+}
+
+.form-input::placeholder {
+  color: #bbb;
+}
+
+.form-input:active,
+.form-input:focus {
+  background-color: #484848;
+  color: #edd700;
+  border: 1px solid #edd700;
+  transition: border-color .2s;
+}
+
+.form-button {
+  display: block;
+  width: 100%;
+  padding: 0 15px;
+  height: 38px;
+  border: 1px solid #484848;
+  border-radius: 3px;
+  background-color: #484848;
+  color: #f4f5f5;
+  font-size: 1rem;
+  letter-spacing: 0.8px;
+}
 </style>
