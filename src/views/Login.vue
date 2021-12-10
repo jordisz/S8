@@ -54,6 +54,7 @@ export default {
         console.log('Welcome, ' + this.user);
         this.$store.commit('setUser', '');
         this.$store.commit('setPassword', '');
+        this.$router.push({path: '/starships'});
       }
     }
 }

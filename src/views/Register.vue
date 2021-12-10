@@ -70,6 +70,7 @@ export default {
         console.log("Welcome, you're logged in.")
         this.$store.commit('setUser', '');
         this.$store.commit('setPassword', '');
+        this.$router.push({path: '/starships'});
       }
     }
 }
