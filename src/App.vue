@@ -4,11 +4,11 @@
       <div class="header-top">
         <div class="logo"><img src="./assets/logo.png" alt=""></div>
         <div class="login-links" v-if="!isLoggedIn">
-          <router-link to="/Login">Log In</router-link>
-          <router-link to="/Register">Sign Up</router-link>
+          <router-link class="login-link" to="/Login">Log In</router-link>
+          <router-link class="login-link" to="/Register">Sign Up</router-link>
         </div>
         <div class="login-links" v-if="isLoggedIn">
-          <router-link to="/" @click="logOut">Log Out</router-link>
+          <router-link class="login-link" to="/" @click="logOut">Log Out</router-link>
         </div>
       </div>
       <Navigation />
@@ -76,6 +76,14 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.login-link {
+  text-transform: uppercase;
+}
+
+.login-link:hover {
+  color: #ccc;
 }
 
 .container {
