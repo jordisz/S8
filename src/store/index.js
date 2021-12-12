@@ -4,10 +4,13 @@ export default createStore({
   state: {
     starships: [],
     selectedStarship: [],
+    selectedPilots: [],
+    pilotsData: [],
     nextPage: null,
-    user: '', // ??
-    password: '', // ??
-    isLoggedIn: false
+    user: '',
+    password: '',
+    isLoggedIn: false,
+    selectedStarshipPilots: null
   },
   getters :{
     starshipList: (state) => {
@@ -15,6 +18,13 @@ export default createStore({
     },
     selectedStarshipInfo: (state) => {
       return state.selectedStarship;
+    },
+    currentStarshipPilots: (state) => {
+      return state.pilotsData;
+    },
+    showPilots: (state) => {
+      if (state.selectedStarship.pilots != undefined)
+        return (state.selectedStarship.pilots.length > 0);
     }
   },
   mutations: {
@@ -38,6 +48,16 @@ export default createStore({
     },
     setLoggedIn(state, bool) {
       state.isLoggedIn = bool;
+    },
+    setSelectedStarshipPilots(state, pilots) {
+      let pilotNumbers = pilots.map(pilot => pilot.replace(/[^0-9]/g,''));
+      state.selectedPilots = pilotNumbers;
+    },
+    setSelectedPilotsData(state, data) {
+      state.pilotsData = [...state.pilotsData, data];
+    },
+    clearPilotsData(state) {
+      state.pilotsData = [];
     }
   },
   actions: {
@@ -47,6 +67,9 @@ export default createStore({
       .then((data) => {
         commit('setStarships', data.results);
         commit('setStarshipsNextPage', data.next);
+      })
+      .catch(error => {
+        console.log(error);
       });
     },
     getMoreStarships({ commit }) {
@@ -59,12 +82,27 @@ export default createStore({
         });
       }
     },
-    getSelectedStarship({ commit }, id) {
+    getSelectedStarship({ commit, dispatch }, id) {
       fetch(`https://swapi.dev/api/starships/${id}`)
       .then(response => response.json())  
       .then((data) => {
         commit('setSelectedStarship', data);
+        commit('setSelectedStarshipPilots', data.pilots);
+        dispatch('getSelectedPilots');
       });
+    },
+    getSelectedPilots({ commit }) {
+      if (this.state.selectedPilots.length > 0) {
+        commit('clearPilotsData');
+        this.state.selectedPilots.forEach(pilot => {
+          fetch(`https://swapi.dev/api/people/${pilot}`)
+          .then(response => response.json())
+          .then((data) => {
+            data.id = pilot;
+            commit('setSelectedPilotsData', data);
+          });
+        });
+      }
     }
   }
 })

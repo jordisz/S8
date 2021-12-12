@@ -21,7 +21,15 @@
                 <li><span>Hyperdrive Rating:</span> &thinsp; {{starshipInfo.hyperdrive_rating}}</li>
                 <li><span>Maximum Speed In Realspace:</span> &thinsp; {{starshipInfo.MGLT}} MGLT</li>
             </ul>
+            <div class="pilotcards" v-if="showPilots">
+                <span>Pilots:</span> &thinsp;
+                <PilotCard 
+                v-for="pilot in pilots"
+                :key="pilot.id"
+                :pilot="pilot"/>
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -43,7 +51,13 @@ export default {
     },
     computed: {
         starshipInfo() {
-            return this.$store.getters.selectedStarshipInfo
+            return this.$store.getters.selectedStarshipInfo;
+        },
+        showPilots() {
+            return this.$store.getters.showPilots;
+        },
+        pilots() {
+            return this.$store.getters.currentStarshipPilots;
         }
     },
     methods: {
@@ -67,7 +81,7 @@ export default {
 }
 
 img {
-    border-bottom: 0.125rem solid #3273c5;
+    border-bottom: .125rem solid #3273c5;
 }
 
 .lists {
@@ -95,8 +109,21 @@ ul:first-of-type {
     font-size: 1rem;
 }
 
-li span {
+li span,
+.pilotcards span {
     color: #ddd;
 }
 
+.pilotcards span {
+    font-size: .9rem;
+    text-transform: uppercase;
+    
+}
+
+.pilotcards {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    position: relative;
+}
 </style>
