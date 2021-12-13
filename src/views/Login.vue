@@ -37,7 +37,7 @@ export default {
     },
     methods: {
       checkUser() {
-        let users = JSON.parse(localStorage.getItem("userList"));
+        let users = JSON.parse(localStorage.getItem("userList")) || [];
         let index = users.findIndex(user => user.userName === this.user);
         if(index === -1){
           console.log('Invalid username :(');
