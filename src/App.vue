@@ -89,8 +89,8 @@ body {
 .container {
     min-height: calc(100vh - 180px);
     background-color: #151515;
-    background-image: url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-left.jpg),
-                      url(https://www.starwars.com/wp-content/themes/starwars-theme/library/images/bg-stars-right.jpg);
+    background-image: url('./assets/bg-stars-left.jpg'),
+                      url('./assets/bg-stars-right.jpg');
     background-repeat: repeat-y;
     background-position: left top,right top;
     background-attachment: fixed;

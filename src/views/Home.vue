@@ -38,5 +38,4 @@ a {
 a:hover {
   color: #ccc;
 }
-
 </style>
