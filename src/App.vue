@@ -31,6 +31,7 @@ export default {
   methods: {
     logOut() {
       this.$store.commit('setLoggedIn', false);
+      console.log("You're logged out. See you soon!")
     }
   }
 }
