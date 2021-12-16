@@ -10,7 +10,8 @@ export default createStore({
     user: '',
     password: '',
     isLoggedIn: false,
-    selectedStarshipPilots: null
+    selectedStarshipPilots: null,
+    isFetching: null
   },
   getters :{
     starshipList: (state) => {
@@ -58,6 +59,9 @@ export default createStore({
     },
     clearPilotsData(state) {
       state.pilotsData = [];
+    },
+    fetchingData(state, bool) {
+      state.isFetching = bool;
     }
   },
   actions: {
@@ -83,6 +87,7 @@ export default createStore({
       }
     },
     getSelectedStarship({ commit, dispatch }, id) {
+      commit('fetchingData', true);
       fetch(`https://swapi.py4e.com/api/starships/${id}`)
       .then(response => response.json())  
       .then((data) => {
@@ -103,6 +108,7 @@ export default createStore({
           });
         });
       }
+      commit('fetchingData', false);
     }
   }
 })

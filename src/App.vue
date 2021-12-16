@@ -146,6 +146,19 @@ form {
   transition: border-color .2s;
 }
 
+.input-error {
+  background-color: #484848;
+  color: red;
+  border: 1px solid red;
+  transition: border-color .2s;
+}
+
+.input-error-msg {
+  width: 100%;
+  text-align: left;
+  color: red;
+}
+
 .form-button {
   display: block;
   width: 100%;
