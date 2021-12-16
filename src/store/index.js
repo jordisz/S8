@@ -50,7 +50,7 @@ export default createStore({
       state.isLoggedIn = bool;
     },
     setSelectedStarshipPilots(state, pilots) {
-      let pilotNumbers = pilots.map(pilot => pilot.replace(/[^0-9]/g,''));
+      let pilotNumbers = pilots.map(pilot => pilot.slice(-4).replace(/[^0-9]/g,''));
       state.selectedPilots = pilotNumbers;
     },
     setSelectedPilotsData(state, data) {
@@ -62,7 +62,7 @@ export default createStore({
   },
   actions: {
     getStarships({ commit }) {
-      fetch('https://swapi.dev/api/starships/')
+      fetch('https://swapi.py4e.com/api/starships/')
       .then(response => response.json())  
       .then((data) => {
         commit('setStarships', data.results);
@@ -83,7 +83,7 @@ export default createStore({
       }
     },
     getSelectedStarship({ commit, dispatch }, id) {
-      fetch(`https://swapi.dev/api/starships/${id}`)
+      fetch(`https://swapi.py4e.com/api/starships/${id}`)
       .then(response => response.json())  
       .then((data) => {
         commit('setSelectedStarship', data);
@@ -95,7 +95,7 @@ export default createStore({
       if (this.state.selectedPilots.length > 0) {
         commit('clearPilotsData');
         this.state.selectedPilots.forEach(pilot => {
-          fetch(`https://swapi.dev/api/people/${pilot}`)
+          fetch(`https://swapi.py4e.com/api/people/${pilot}`)
           .then(response => response.json())
           .then((data) => {
             data.id = pilot;

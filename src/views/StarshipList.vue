@@ -8,7 +8,7 @@
                 :ref="index === starshipList.length -1 ? 'last' : undefined"
                 class = "list-item">
                 <router-link
-                    :to="{name: 'StarshipCard', params: {id: (starship.url).replace(/[^0-9]/g,'')}}">
+                    :to="{name: 'StarshipCard', params: {id: (starship.url).slice(-4).replace(/[^0-9]/g,'')}}">
                         <h6>{{starship.name}}</h6>
                         <p>{{starship.model}}</p>
                 </router-link>
