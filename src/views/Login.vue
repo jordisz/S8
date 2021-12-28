@@ -3,8 +3,20 @@
     <h2>Sign In</h2>
     <form>
       <div class="input-wrapper">
-        <input class="form-input" type="text" placeholder="Username" v-model="user"/>
-        <input class="form-input" type="password" placeholder="Password" v-model="password"/>
+        <div class="input-error-msg">{{userErrorMsg}}</div>
+        <input class="form-input" 
+          :class="{'input-error': inputError === 'userName' }" 
+          type="text" 
+          placeholder="Username" 
+          @click="clearErrorMessages"
+          v-model="user"/>
+        <div class="input-error-msg">{{passwordErrorMsg}}</div>
+        <input class="form-input" 
+          :class="{'input-error': inputError === 'password' }" 
+          type="password" 
+          placeholder="Password" 
+          @click="clearErrorMessages"
+          v-model="password"/>
         <button class="form-button" @click.prevent="checkUser">Sign In</button>
       </div>
     </form>
@@ -17,6 +29,13 @@
 <script>
 export default {
     name: 'Login',
+    data() {
+      return {
+        inputError: '',
+        userErrorMsg: '',
+        passwordErrorMsg: ''
+      }
+    },
     computed: {
       user: {
         get () {
@@ -40,13 +59,15 @@ export default {
         let users = JSON.parse(localStorage.getItem("userList")) || [];
         let index = users.findIndex(user => user.userName === this.user);
         if(index === -1){
-          console.log('Invalid username :(');
-          this.$store.commit('setUser', '');
+          this.userErrorMsg = 'Invalid username :(';
+          this.inputError = 'userName';
+          //this.$store.commit('setUser', '');
           this.$store.commit('setPassword', '');
           return;
         }
         if(this.password !== users[index].password) {
-          console.log('Wrong password. Please try again.');
+          this.passwordErrorMsg = 'Wrong password. Please try again.';
+          this.inputError = 'password';
           this.$store.commit('setPassword', '');
           return;
         }
@@ -55,6 +76,11 @@ export default {
         this.$store.commit('setUser', '');
         this.$store.commit('setPassword', '');
         this.$router.push({path: '/starships'});
+      },
+      clearErrorMessages() {
+        this.inputError = '';
+        this.userErrorMsg = '';
+        this.passwordErrorMsg = '';
       }
     }
 }

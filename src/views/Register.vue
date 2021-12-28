@@ -3,8 +3,20 @@
     <h2>Create Your Account</h2>
     <form>
       <div class="input-wrapper">
-        <input class="form-input" type="text" placeholder="Username" v-model="user"/>
-        <input class="form-input" type="password" placeholder="Password" v-model="password"/>
+        <div class="input-error-msg">{{userErrorMsg}}</div>
+        <input class="form-input" 
+          :class="{'input-error': inputError === 'userName' }" 
+          type="text" 
+          placeholder="Username"
+          @click="clearErrorMessages" 
+          v-model="user"/>
+        <div class="input-error-msg">{{passwordErrorMsg}}</div>
+        <input class="form-input" 
+          :class="{'input-error': inputError === 'password' }"
+          type="password" 
+          placeholder="Password"
+          @click="clearErrorMessages" 
+          v-model="password"/>
         <button class="form-button" @click.prevent="createNewUser">Create Account</button>
       </div>
     </form>
@@ -17,7 +29,10 @@ export default {
     name: 'Register',
     data() {
       return {
-        focused: false
+        focused: false,
+        userErrorMsg: '',
+        passwordErrorMsg: '',
+        inputError: ''
       }
     },
     computed: {
@@ -42,19 +57,21 @@ export default {
       createNewUser() {
         let users = JSON.parse(localStorage.getItem("userList") || "[]");
         if (this.$store.state.user === '') {          
-          console.log('Please enter a username');
+          this.inputError = 'userName';
+          this.userErrorMsg = 'Please enter a username';
           this.$store.commit('setUser', '');
           this.$store.commit('setPassword', '');
           return;
         }
         if (users.some(user => user.userName === this.user)) {
-          console.log(`User name ${this.user} already exists, sorry.`)
-          this.$store.commit('setUser', '');
-          this.$store.commit('setPassword', '');
+          this.inputError = 'userName';
+          this.userErrorMsg = `User name ${this.user} already exists, sorry.`
+          //this.$store.commit('setUser', '');
           return;
         }
         if (this.$store.state.password.length < 6) {
-          console.log('Password must contain at least 6 characters');
+          this.inputError = 'password';
+          this.passwordErrorMsg = 'Password must contain at least 6 characters';
           this.$store.commit('setPassword', '');
           return;
         }
@@ -71,6 +88,11 @@ export default {
         this.$store.commit('setUser', '');
         this.$store.commit('setPassword', '');
         this.$router.push({path: '/starships'});
+      },
+      clearErrorMessages() {
+        this.inputError = '';
+        this.userErrorMsg = '';
+        this.passwordErrorMsg = '';
       }
     }
 }

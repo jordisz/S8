@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div v-if="!this.$store.state.isFetching" class="container">
         <h2 class="name">{{starshipInfo.name}}</h2>
         <img :src="`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`" @error="handleMissingImage" alt="">
         <div class="lists">
